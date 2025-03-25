@@ -1,15 +1,14 @@
-package vcsc.core.abstracts.actuator;
+package vcsc.core.abstracts.templates.rotator;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 
-import vcsc.core.abstracts.state.RotatorState;
+import vcsc.core.abstracts.actuator.Actuator;
 import vcsc.core.abstracts.state.State;
-import vcsc.teamcode.cmp.elbow.ElbowState;
 
-public class RotatorActuator extends Actuator {
-    ServoImplEx servo;
-    double angle;
+public class RotatorActuator<S extends RotatorState<S, P>, P extends RotatorPose> extends Actuator<S> {
+    protected ServoImplEx servo;
+    protected double angle;
 
     public RotatorActuator(HardwareMap hardwareMap, String name) {
         servo = hardwareMap.get(ServoImplEx.class, name);
@@ -22,8 +21,8 @@ public class RotatorActuator extends Actuator {
     }
 
     @Override
-    public void updateState(State<?> newState) {
-        RotatorState<?, ?> wristState = (RotatorState<?, ?>) newState;
+    public void updateState(State<S> newState) {
+        RotatorState<S, P> wristState = (RotatorState<S, P>) newState;
         angle = wristState.getAngle();
     }
 

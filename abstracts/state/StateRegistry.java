@@ -5,9 +5,10 @@ import java.util.Map;
 
 public class StateRegistry {
     private static final StateRegistry instance = new StateRegistry();
-    private final  Map<Class<?>, State<?>> states = new HashMap<>();
+    private final Map<Class<?>, State<?>> states = new HashMap<>();
 
-    private StateRegistry() {}
+    private StateRegistry() {
+    }
 
     public static StateRegistry getInstance() {
         return instance;
@@ -15,6 +16,12 @@ public class StateRegistry {
 
     public <T extends State<?>> void registerState(T state) {
         states.put(state.getClass(), state);
+    }
+
+    public <T extends State<?>> void registerStates(T... stateArray) {
+        for (T state : stateArray) {
+            registerState(state);
+        }
     }
 
     public <T extends State<T>> T getState(Class<T> stateClass) {

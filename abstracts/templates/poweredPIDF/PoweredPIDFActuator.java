@@ -1,13 +1,13 @@
-package vcsc.core.abstracts.actuator;
+package vcsc.core.abstracts.templates.poweredPIDF;
 
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import vcsc.core.abstracts.state.PoweredPIDFState;
+import vcsc.core.abstracts.actuator.Actuator;
 import vcsc.core.abstracts.state.State;
 
-public abstract class PoweredPIDFActuator extends Actuator {
+public abstract class PoweredPIDFActuator<S extends PoweredPIDFState<S, P>, P extends PoweredPIDFPose> extends Actuator<S> {
     protected PIDFController controller;
     protected PIDFCoefficients coefficients;
 
@@ -76,8 +76,8 @@ public abstract class PoweredPIDFActuator extends Actuator {
     abstract public void reset();
 
     @Override
-    public void updateState(State<?> newState) {
-        PoweredPIDFState poweredPIDFState = (PoweredPIDFState) newState;
+    public void updateState(State<S> newState) {
+        PoweredPIDFState<S, P> poweredPIDFState = (PoweredPIDFState<S, P>) newState;
         if (poweredPIDFState.getPower() == 0) {
             targetPosition = poweredPIDFState.getTargetPosition();
             controller.setSetPoint(poweredPIDFState.getTargetPosition()); // This one

@@ -2,7 +2,7 @@ package vcsc.core.abstracts.actuator;
 
 import vcsc.core.abstracts.state.State;
 
-public abstract class Actuator {
+public abstract class Actuator<S extends State<S>> {
     protected boolean _inAction;
 
     public void init() {
@@ -20,5 +20,5 @@ public abstract class Actuator {
         _inAction = inAction;
     }
 
-    public abstract void updateState(State<?> newState);
+    public abstract void updateState(State<S> newState);
 }

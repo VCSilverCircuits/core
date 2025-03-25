@@ -2,8 +2,9 @@ package vcsc.core.abstracts.action;
 
 import vcsc.core.abstracts.state.State;
 import vcsc.core.abstracts.state.StateRegistry;
+import vcsc.core.abstracts.task.Task;
 
-public abstract class Action<S extends State<S>>  {
+public abstract class Action<S extends State<S>> implements Task {
     protected S state;
 
     public Action(Class<S> stateClass) {
@@ -16,7 +17,11 @@ public abstract class Action<S extends State<S>>  {
         return state.tryLock(this);
     }
 
-    private void end() {
+    protected void end() {
+        releaseLock();
+    }
+
+    protected void releaseLock() {
         state.releaseLock(this);
     }
 
@@ -26,7 +31,9 @@ public abstract class Action<S extends State<S>>  {
     // Check if finished
     public abstract boolean isFinished();
 
-    public void cancel() {
-        state.cancelAction();
+    public abstract void cancel();
+
+    public boolean isAsync() {
+        return false; // Default implementation, can be overridden
     }
 }

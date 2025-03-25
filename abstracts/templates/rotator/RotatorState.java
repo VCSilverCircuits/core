@@ -1,8 +1,7 @@
-package vcsc.core.abstracts.state;
+package vcsc.core.abstracts.templates.rotator;
 
 import vcsc.core.abstracts.action.Action;
-import vcsc.core.abstracts.pose.RotatorPose;
-import vcsc.teamcode.cmp.elbow.ElbowPose;
+import vcsc.core.abstracts.state.State;
 
 public class RotatorState<S extends RotatorState<S, P>, P extends RotatorPose> extends State<S> {
     double angle;

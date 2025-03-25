@@ -1,4 +1,4 @@
-package vcsc.core.abstracts.pose;
+package vcsc.core.abstracts.templates.rotator;
 
 public interface RotatorPose {
     double getAngle();

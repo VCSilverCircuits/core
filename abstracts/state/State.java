@@ -6,11 +6,11 @@ import vcsc.core.abstracts.action.Action;
 import vcsc.core.abstracts.actuator.Actuator;
 
 public abstract class State<S extends State<S>> {
-    ArrayList<Actuator> actuators = new ArrayList<>();
-    Action<S> lockedBy = null;
+    protected ArrayList<Actuator<S>> actuators = new ArrayList<>();
+    protected Action<S> lockedBy = null;
 
     public boolean idle() {
-        for (Actuator actuator : actuators) {
+        for (Actuator<S> actuator : actuators) {
             if (!actuator.idle()) {
                 return false;
             }
@@ -18,7 +18,7 @@ public abstract class State<S extends State<S>> {
         return true;
     }
 
-    public void registerActuator(Actuator actuator) {
+    public void registerActuator(Actuator<S> actuator) {
         actuators.add(actuator);
     }
 
@@ -58,7 +58,7 @@ public abstract class State<S extends State<S>> {
     }
 
     protected void notifyActuators() {
-        for (Actuator actuator : actuators) {
+        for (Actuator<S> actuator : actuators) {
             actuator.updateState(this);
         }
     }
