@@ -1,5 +1,7 @@
 package vcsc.core.abstracts.task;
 
+import java.util.Set;
+
 public class BackgroundTask implements Task {
     Task _task;
 
@@ -30,5 +32,15 @@ public class BackgroundTask implements Task {
     @Override
     public boolean isAsync() {
         return true;
+    }
+
+    @Override
+    public boolean conflictsWith(Task other) {
+        return _task.conflictsWith(other);
+    }
+
+    @Override
+    public Set<Class<?>> requirements() {
+        return _task.requirements();
     }
 }

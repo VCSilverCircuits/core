@@ -2,6 +2,8 @@ package vcsc.core.abstracts.task;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ParallelTask implements Task {
     final ArrayList<Task> _tasks = new ArrayList<>();
@@ -52,5 +54,24 @@ public class ParallelTask implements Task {
     @Override
     public boolean isAsync() {
         return false;
+    }
+
+    @Override
+    public boolean conflictsWith(Task other) {
+        for (Task task : _tasks) {
+            if (task.conflictsWith(other)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Set<Class<?>> requirements() {
+        HashSet<Class<?>> requirements = new HashSet<>();
+        for (Task task : _tasks) {
+            requirements.addAll(task.requirements());
+        }
+        return requirements;
     }
 }

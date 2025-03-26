@@ -1,5 +1,7 @@
 package vcsc.core.abstracts.action;
 
+import java.util.Set;
+
 import vcsc.core.abstracts.state.State;
 import vcsc.core.abstracts.state.StateRegistry;
 import vcsc.core.abstracts.task.Task;
@@ -35,5 +37,13 @@ public abstract class Action<S extends State<S>> implements Task {
 
     public boolean isAsync() {
         return false; // Default implementation, can be overridden
+    }
+
+    public Set<Class<?>> requirements() {
+        return Set.of(state.getClass());
+    }
+
+    public boolean conflictsWith(Task other) {
+        return other.requirements().contains(state.getClass());
     }
 }

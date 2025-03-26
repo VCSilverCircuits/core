@@ -1,5 +1,7 @@
 package vcsc.core.abstracts.task;
 
+import java.util.Set;
+
 public interface Task {
     boolean start();
 
@@ -12,4 +14,8 @@ public interface Task {
     void cancel();
 
     boolean isAsync();
+
+    boolean conflictsWith(Task other);
+
+    Set<Class<?>> requirements();
 }

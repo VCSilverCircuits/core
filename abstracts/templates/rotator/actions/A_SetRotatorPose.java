@@ -25,11 +25,18 @@ public class A_SetRotatorPose<S extends RotatorState<S, P>, P extends RotatorPos
 
     @Override
     public void loop() {
-
+        if (state.idle() && state.getPose().equals(pose)) {
+            end(); // End the action if the pose is reached
+        }
     }
 
     @Override
     public boolean isFinished() {
         return true;
+    }
+
+    @Override
+    public void cancel() {
+        end();
     }
 }

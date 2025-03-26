@@ -1,5 +1,7 @@
 package vcsc.core.abstracts.task;
 
+import java.util.Collections;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class UntilTask implements Task {
@@ -35,5 +37,15 @@ public class UntilTask implements Task {
     @Override
     public boolean isAsync() {
         return false;
+    }
+
+    @Override
+    public boolean conflictsWith(Task other) {
+        return false;
+    }
+
+    @Override
+    public Set<Class<?>> requirements() {
+        return Collections.emptySet();
     }
 }

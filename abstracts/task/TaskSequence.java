@@ -1,9 +1,11 @@
 package vcsc.core.abstracts.task;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
-public class TaskSequence {
+public class TaskSequence implements Task {
     ArrayList<Task> tasks = new ArrayList<>();
     ArrayList<Task> runningTasks = new ArrayList<>();
     int currentTaskIndex = 0;
@@ -96,5 +98,29 @@ public class TaskSequence {
             task.cancel();
         }
         isRunning = false;
+    }
+
+    @Override
+    public boolean isAsync() {
+        return false;
+    }
+
+    @Override
+    public boolean conflictsWith(Task other) {
+        for (Task task : tasks) {
+            if (task.conflictsWith(other)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Set<Class<?>> requirements() {
+        HashSet<Class<?>> requirements = new HashSet<>();
+        for (Task task : tasks) {
+            requirements.addAll(task.requirements());
+        }
+        return requirements;
     }
 }

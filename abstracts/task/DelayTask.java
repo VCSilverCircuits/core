@@ -1,6 +1,9 @@
 package vcsc.core.abstracts.task;
 
 
+import java.util.Collections;
+import java.util.Set;
+
 public class DelayTask implements Task {
     long startTime;
     long delay;
@@ -36,5 +39,15 @@ public class DelayTask implements Task {
     @Override
     public boolean isAsync() {
         return false;
+    }
+
+    @Override
+    public boolean conflictsWith(Task other) {
+        return false;
+    }
+
+    @Override
+    public Set<Class<?>> requirements() {
+        return Collections.emptySet();
     }
 }

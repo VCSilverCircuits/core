@@ -1,5 +1,8 @@
 package vcsc.core.abstracts.templates.poweredPIDF.actions;
 
+import static vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.EXCEED;
+import static vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.SETTLE;
+
 import vcsc.core.abstracts.action.Action;
 import vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFPose;
 import vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFState;
@@ -17,7 +20,7 @@ public class A_SetPoweredPIDFTargetPosition<S extends PoweredPIDFState<S, P>, P 
     }
 
     public A_SetPoweredPIDFTargetPosition(Class<S> klass, double targetPosition) {
-        this(klass, targetPosition, vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.SETTLE);
+        this(klass, targetPosition, SETTLE);
     }
 
     @Override
@@ -34,17 +37,27 @@ public class A_SetPoweredPIDFTargetPosition<S extends PoweredPIDFState<S, P>, P 
 
     @Override
     public void loop() {
-        if (PIDMode == vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.EXCEED) {
+        if (_finished) {
+            return;
+        }
+
+        if (PIDMode == EXCEED) {
             if (direction == DIRECTION.UP && state.getRealPosition() > targetPosition) {
-                _finished = true;
+                end();
             } else if (direction == DIRECTION.DOWN && state.getRealPosition() < targetPosition) {
-                _finished = true;
+                end();
             }
         } else { // SETTLE
             if (state.idle() && state.getTargetPosition() == targetPosition) {
-                _finished = true;
+                end();
             }
         }
+    }
+
+    @Override
+    protected void end() {
+        super.end();
+        _finished = true;
     }
 
     @Override

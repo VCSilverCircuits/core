@@ -18,7 +18,8 @@ public class StateRegistry {
         states.put(state.getClass(), state);
     }
 
-    public <T extends State<?>> void registerStates(T... stateArray) {
+    @SafeVarargs
+    public final <T extends State<?>> void registerStates(T... stateArray) {
         for (T state : stateArray) {
             registerState(state);
         }

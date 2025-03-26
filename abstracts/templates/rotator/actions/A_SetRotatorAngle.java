@@ -25,11 +25,18 @@ public class A_SetRotatorAngle<S extends RotatorState<S, P>, P extends RotatorPo
 
     @Override
     public void loop() {
-
+        if (state.idle() && state.getAngle() == angle) {
+            end(); // End the action if the angle is reached
+        }
     }
 
     @Override
     public boolean isFinished() {
         return true;
+    }
+
+    @Override
+    public void cancel() {
+        end();
     }
 }

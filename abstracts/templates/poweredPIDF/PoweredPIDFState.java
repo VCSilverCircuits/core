@@ -26,11 +26,11 @@ public class PoweredPIDFState<S extends PoweredPIDFState<S, P>, P extends Powere
     }
 
     public void setPower(Action<S> action, double power) {
-        this.power = power;
-        notifyActuators();
-        if (power != 0) {
+        if (this.power != 0) {
             targetPosition = getRealPosition();
         }
+        this.power = power;
+        notifyActuators();
     }
 
     public void cancelMotion(Action<S> action) {
@@ -75,6 +75,7 @@ public class PoweredPIDFState<S extends PoweredPIDFState<S, P>, P extends Powere
     public void setTargetPose(Action<S> action, P targetPose) {
         assertLock(action);
         this.targetPose = targetPose;
+        setTargetPosition(action, targetPose.getPosition());
     }
 
     public double getSpeed() {
@@ -84,6 +85,7 @@ public class PoweredPIDFState<S extends PoweredPIDFState<S, P>, P extends Powere
     public void setSpeed(Action<S> action, double speed) {
         assertLock(action);
         this.speed = speed;
+        notifyActuators();
     }
 
 }
