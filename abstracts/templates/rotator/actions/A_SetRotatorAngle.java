@@ -16,6 +16,7 @@ public class A_SetRotatorAngle<S extends RotatorState<S, P>, P extends RotatorPo
     public boolean start() {
         boolean started = super.start();
         if (!started) {
+            end();
             return false; // If the action cannot start, return false
         }
         // Set the angle to a default value (e.g., 0 degrees)

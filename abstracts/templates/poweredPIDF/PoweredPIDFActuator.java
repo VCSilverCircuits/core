@@ -26,7 +26,7 @@ public abstract class PoweredPIDFActuator<S extends PoweredPIDFState<S, P>, P ex
                 coefficients.d,
                 coefficients.f
         );
-        controller.setTolerance(5);
+        controller.setTolerance(15);
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         loopTime.reset();
     }
@@ -63,6 +63,8 @@ public abstract class PoweredPIDFActuator<S extends PoweredPIDFState<S, P>, P ex
         }
 
         controller.setSetPoint(newTarget);*/
+
+        System.out.println("PoweredPID " + this.getClass().getSimpleName() + "pid at setpoint?: " + controller.atSetPoint());
 
         setInAction(!controller.atSetPoint() || power != 0);
         if (power != 0) {

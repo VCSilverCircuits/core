@@ -18,7 +18,9 @@ public class TaskManager {
     public boolean runTask(Task task) {
         for (Task other : runningTasks) {
             if (task.conflictsWith(other)) {
-                return false;
+                System.out.println("Task " + task.getClass().getSimpleName() + " conflicts with task " + other.getClass().getSimpleName() + ". Cannot start.");
+                other.cancel();
+                //return false;
             }
         }
 

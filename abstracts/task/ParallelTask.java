@@ -29,6 +29,7 @@ public class ParallelTask implements Task {
 
     @Override
     public void loop() {
+        System.out.println("Looping ParallelTask");
         for (Task task : _tasks) {
             task.loop();
         }
@@ -38,6 +39,7 @@ public class ParallelTask implements Task {
     public boolean isFinished() {
         for (Task task : _tasks) {
             if (!task.isFinished()) {
+                System.out.println("(ParallelTask) Task not finished: " + task.getClass().getSimpleName());
                 return false;
             }
         }

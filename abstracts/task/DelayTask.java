@@ -16,7 +16,7 @@ public class DelayTask implements Task {
     @Override
     public boolean start() {
         startTime = System.currentTimeMillis();
-        return false;
+        return true;
     }
 
     @Override

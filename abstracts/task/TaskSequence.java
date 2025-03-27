@@ -1,7 +1,6 @@
 package vcsc.core.abstracts.task;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -51,10 +50,15 @@ public class TaskSequence implements Task {
         }
         currentTaskIndex = 0;
         isRunning = true;
-        return tasks.get(currentTaskIndex).start();
+        boolean started = tasks.get(currentTaskIndex).start();
+        if (started) {
+            runningTasks.add(tasks.get(currentTaskIndex));
+        }
+        return started;
     }
 
     private boolean startNext() {
+        // TODO: Make sure it doesn't have any conflicts before starting... somehow
         currentTaskIndex++;
         if (currentTaskIndex < tasks.size()) {
             Task nextTask = tasks.get(currentTaskIndex);
@@ -69,13 +73,17 @@ public class TaskSequence implements Task {
         return false; // No more tasks to start
     }
 
+
     public void loop() {
+        System.out.println("Looping task sequence");
         if (!isRunning || currentTaskIndex >= tasks.size()) {
+            System.out.println("Task sequence not running");
             isRunning = false;
             return;
         }
 
         Task currentTask = tasks.get(currentTaskIndex);
+        System.out.println("Currently processing task #" + currentTaskIndex + ": " + currentTask.getClass().getSimpleName());
         if (currentTask.isFinished()) {
             if (!startNext()) {
                 isRunning = false; // No more tasks to run
@@ -86,6 +94,7 @@ public class TaskSequence implements Task {
         for (Task task : runningTasks) {
             task.loop();
             if (task.isFinished()) {
+                System.out.println("Task finished: " + task.getClass().getSimpleName());
                 toRemove.add(task);
             }
         }
@@ -120,10 +129,11 @@ public class TaskSequence implements Task {
 
     @Override
     public Set<Class<?>> requirements() {
-        HashSet<Class<?>> requirements = new HashSet<>();
-        for (Task task : tasks) {
-            requirements.addAll(task.requirements());
-        }
-        return requirements;
+        return tasks.get(0).requirements();
+//        HashSet<Class<?>> requirements = new HashSet<>();
+//        for (Task task : tasks) {
+//            requirements.addAll(task.requirements());
+//        }
+//        return requirements;
     }
 }

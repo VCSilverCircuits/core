@@ -37,6 +37,11 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
 
     @Override
     public void loop() {
+        System.out.println("PoweredPIDF Class: " + this.getClass().getSimpleName());
+        System.out.println("PoweredPIDF idle: " + state.idle());
+        System.out.println("State target pose: " + state.getTargetPose());
+        System.out.println("Action target pose: " + targetPose);
+
         if (PIDMode == EXCEED) {
             if (direction == DIRECTION.UP && state.getRealPosition() > state.getTargetPosition()) {
                 end();

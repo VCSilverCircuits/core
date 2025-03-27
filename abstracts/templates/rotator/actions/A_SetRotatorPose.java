@@ -25,7 +25,7 @@ public class A_SetRotatorPose<S extends RotatorState<S, P>, P extends RotatorPos
 
     @Override
     public void loop() {
-        if (state.idle() && state.getPose().equals(pose)) {
+        if (state.idle() && state.getPose() != null && state.getPose().equals(pose)) {
             end(); // End the action if the pose is reached
         }
     }
