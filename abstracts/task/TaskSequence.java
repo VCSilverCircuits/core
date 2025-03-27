@@ -71,6 +71,7 @@ public class TaskSequence implements Task {
 
     public void loop() {
         if (!isRunning || currentTaskIndex >= tasks.size()) {
+            isRunning = false;
             return;
         }
 
@@ -81,12 +82,14 @@ public class TaskSequence implements Task {
             }
         }
 
+        ArrayList<Task> toRemove = new ArrayList<>();
         for (Task task : runningTasks) {
             task.loop();
             if (task.isFinished()) {
-                runningTasks.remove(task);
+                toRemove.add(task);
             }
         }
+        runningTasks.removeAll(toRemove);
     }
 
     public boolean isFinished() {

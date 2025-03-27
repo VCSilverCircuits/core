@@ -1,5 +1,7 @@
 package vcsc.core.abstracts.templates.poweredPIDF.actions;
 
+import static vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.EXCEED;
+
 import vcsc.core.abstracts.action.Action;
 import vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFPose;
 import vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFState;
@@ -24,6 +26,7 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
     public boolean start() {
         boolean started = super.start();
         if (!started) {
+            end();
             return false; // If the action cannot start, return false
         }
         _finished = false;
@@ -34,22 +37,27 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
 
     @Override
     public void loop() {
-        if (PIDMode == vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.EXCEED) {
+        if (PIDMode == EXCEED) {
             if (direction == DIRECTION.UP && state.getRealPosition() > state.getTargetPosition()) {
-                _finished = true;
+                end();
             } else if (direction == DIRECTION.DOWN && state.getRealPosition() < state.getTargetPosition()) {
-                _finished = true;
+                end();
             }
         } else { // SETTLE
             if (state.idle() && state.getTargetPose() == targetPose) {
-                _finished = true;
+                end();
             }
         }
     }
 
     @Override
-    public void cancel() {
+    protected void end() {
         _finished = true; // Mark as finished to stop the action
+        super.end();
+    }
+
+    @Override
+    public void cancel() {
         this.state.cancelMotion(this);
         super.end();
     }

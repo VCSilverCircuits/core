@@ -1,6 +1,5 @@
 package vcsc.core.abstracts.behavior;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +7,7 @@ import vcsc.core.abstracts.state.State;
 import vcsc.core.abstracts.task.Task;
 
 public abstract class Behavior implements Task {
-    protected ArrayList<Class<? extends State<?>>> requirements = new ArrayList<>();
+    protected Set<Class<? extends State<?>>> requirements = new HashSet<>();
 
     public abstract boolean start();
 
@@ -27,6 +26,24 @@ public abstract class Behavior implements Task {
 
     protected final void addRequirement(Class<? extends State<?>> requirement) {
         requirements.add(requirement);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected final void addRequirement(Behavior behavior) {
+        for (Class<?> req : behavior.requirements()) {
+            addRequirement((Class<? extends State<?>>) req);
+        }
+    }
+
+    protected final void addRequirements(HashSet<Class<? extends State<?>>> requirements) {
+        this.requirements.addAll(requirements);
+    }
+
+    @SafeVarargs
+    protected final void addRequirements(Class<? extends State<?>>... requirements) {
+        for (Class<? extends State<?>> req : requirements) {
+            addRequirement(req);
+        }
     }
 
     public final Set<Class<?>> requirements() {

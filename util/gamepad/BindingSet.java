@@ -17,12 +17,16 @@ public class BindingSet {
         this(null);
     }
 
-    public void bind(GamepadButton button, Task task) {
+    public void setParent(BindingSet parent) {
+        this.parent = parent;
+    }
+
+    public void bindTask(GamepadButton button, Task task) {
         bindings.put(button, task);
     }
 
-    public void bind(GamepadButton button, Task... tasks) {
-        bind(button, new ParallelTask(tasks));
+    public void bindTasks(GamepadButton button, Task... tasks) {
+        bindTask(button, new ParallelTask(tasks));
     }
 
     public Task getTask(GamepadButton button) {

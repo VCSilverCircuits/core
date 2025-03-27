@@ -1,5 +1,5 @@
 package vcsc.core.util.gamepad;
 
-public enum RobotMode {
-    DEFAULT
+public interface RobotMode {
+    RobotMode DEFAULT = null;
 }
