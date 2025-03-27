@@ -7,6 +7,8 @@ import vcsc.core.abstracts.templates.rotator.RotatorState;
 public class A_SetRotatorPose<S extends RotatorState<S, P>, P extends RotatorPose> extends Action<S> {
     P pose;
 
+    boolean _isFinished = true;
+
     public A_SetRotatorPose(Class<S> klass, P pose) {
         super(klass);
         this.pose = pose;
@@ -19,6 +21,7 @@ public class A_SetRotatorPose<S extends RotatorState<S, P>, P extends RotatorPos
             return false; // If the action cannot start, return false
         }
         // Set the angle to a default value (e.g., 0 degrees)
+        _isFinished = false;
         this.state.setPose(this, pose);
         return true;
     }
@@ -32,7 +35,13 @@ public class A_SetRotatorPose<S extends RotatorState<S, P>, P extends RotatorPos
 
     @Override
     public boolean isFinished() {
-        return true;
+        return _isFinished;
+    }
+
+    @Override
+    protected void end() {
+        super.end();
+        _isFinished = true;
     }
 
     @Override

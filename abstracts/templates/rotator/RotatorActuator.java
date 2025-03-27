@@ -16,7 +16,7 @@ public class RotatorActuator<S extends RotatorState<S, P>, P extends RotatorPose
 
     @Override
     public void loop() {
-        double rotPosition = angle / 180.0; // Convert angle to a value between 0 and 1 for the servo
+//        double rotPosition = angle; // Convert angle to a value between 0 and 1 for the servo
         servo.setPosition(angle);
     }
 
