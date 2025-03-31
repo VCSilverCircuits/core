@@ -17,13 +17,6 @@ public class TaskManager {
 
     public boolean runTask(Task task) {
         for (Task other : runningTasks) {
-            // Check if task is of the same type
-            if (task.getClass() == other.getClass()) {
-                // If the same type, we can only run one instance of this task at a time
-                System.out.println("Task " + task.getClass().getSimpleName() + " is already running. Cannot start another instance.");
-                return false; // Cannot start the same task type again
-            }
-
             if (task.conflictsWith(other)) {
                 System.out.println("Task " + task.getClass().getSimpleName() + " conflicts with task " + other.getClass().getSimpleName() + ". Cannot start.");
                 other.cancel();
