@@ -117,7 +117,7 @@ public class TaskSequence implements Task {
 
         Task currentTask = tasks.get(currentTaskIndex);
         System.out.println("     Currently processing task #" + currentTaskIndex + ": " + currentTask.getClass().getSimpleName());
-        if (currentTask.isFinished()) {
+        if (currentTask.isFinished() || currentTask.isAsync()) {
             if (!startNext()) {
                 isRunning = false; // No more tasks to run
             }
