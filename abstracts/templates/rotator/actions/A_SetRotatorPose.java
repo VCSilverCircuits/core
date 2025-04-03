@@ -46,6 +46,7 @@ public class A_SetRotatorPose<S extends RotatorState<S, P>, P extends RotatorPos
 
     @Override
     public void cancel() {
+        super.cancel();
         end();
     }
 }

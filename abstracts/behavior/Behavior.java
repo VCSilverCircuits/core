@@ -9,9 +9,13 @@ import vcsc.core.abstracts.task.Task;
 public abstract class Behavior implements Task {
     protected Set<Class<? extends State<?>>> requirements = new HashSet<>();
 
-    public abstract boolean start();
+    public boolean start() {
+        System.out.println("[" + this.getClass().getSimpleName() + "::start] Behavior started.");
+        return true;
+    }
 
     private void end() {
+        System.out.println("[" + this.getClass().getSimpleName() + "::end] Behavior finished.");
     }
 
     // Perform updates if needed
@@ -21,7 +25,7 @@ public abstract class Behavior implements Task {
     public abstract boolean isFinished();
 
     public void cancel() {
-
+        System.out.println("[" + this.getClass().getSimpleName() + "::cancel] Behavior canceled.");
     }
 
     protected final void addRequirement(Class<? extends State<?>> requirement) {

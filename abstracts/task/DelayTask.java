@@ -15,6 +15,7 @@ public class DelayTask implements Task {
 
     @Override
     public boolean start() {
+        System.out.println("[DelayTask::start] Delaying for " + delay + " milliseconds");
         startTime = System.currentTimeMillis();
         return true;
     }
@@ -33,6 +34,7 @@ public class DelayTask implements Task {
 
     @Override
     public void cancel() {
+        System.out.println("[DelayTask::cancel] Delay canceled.");
         finished = true;
     }
 

@@ -2,38 +2,31 @@ package vcsc.core.abstracts.task;
 
 import java.util.Collections;
 import java.util.Set;
-import java.util.function.Supplier;
 
-public class UntilTask implements Task {
-    Supplier<Boolean> _condition;
-    boolean _finished = false;
-
-    public UntilTask(Supplier<Boolean> condition) {
-        _condition = condition;
+public class LogTask implements Task{
+    String message;
+    public LogTask(String message) {
+        this.message = message;
     }
-
     @Override
     public boolean start() {
-        System.out.println("[UntilTask::start] Waiting until condition is met.");
+        System.out.println(message);
         return true;
     }
 
     @Override
     public void loop() {
-        if (!_finished && _condition.get()) {
-            _finished = true;
-        }
+
     }
 
     @Override
     public boolean isFinished() {
-        return _finished || _condition.get();
+        return true;
     }
 
     @Override
     public void cancel() {
-        System.out.println("[UntilTask::cancel] UntilTask canceled.");
-        _finished = true;
+
     }
 
     @Override

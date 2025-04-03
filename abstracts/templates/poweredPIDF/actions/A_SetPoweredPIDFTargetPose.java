@@ -37,19 +37,22 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
 
     @Override
     public void loop() {
-        System.out.println("PoweredPIDF Class: " + this.getClass().getSimpleName());
-        System.out.println("PoweredPIDF idle: " + state.idle());
-        System.out.println("State target pose: " + state.getTargetPose());
-        System.out.println("Action target pose: " + targetPose);
+        System.out.println("[A_SetPoweredPIDFTargetPose::loop] Class name: " + this.getClass().getSimpleName());
+        System.out.println("[A_SetPoweredPIDFTargetPose::loop] idle: " + state.idle());
+        System.out.println("[A_SetPoweredPIDFTargetPose::loop] State target pose: " + state.getTargetPose());
+        System.out.println("[A_SetPoweredPIDFTargetPose::loop] Action target pose: " + targetPose);
 
         if (PIDMode == EXCEED) {
             if (direction == DIRECTION.UP && state.getRealPosition() > state.getTargetPosition()) {
+                System.out.println("[A_SetPoweredPIDFTargetPose::loop] Exceeding UP");
                 end();
             } else if (direction == DIRECTION.DOWN && state.getRealPosition() < state.getTargetPosition()) {
+                System.out.println("[A_SetPoweredPIDFTargetPose::loop] Exceeding DOWN");
                 end();
             }
         } else { // SETTLE
             if (state.idle() && state.getTargetPose() == targetPose) {
+                System.out.println("[A_SetPoweredPIDFTargetPose::loop] Settled");
                 end();
             }
         }

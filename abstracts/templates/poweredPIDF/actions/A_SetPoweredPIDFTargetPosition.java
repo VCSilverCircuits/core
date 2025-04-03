@@ -62,9 +62,10 @@ public class A_SetPoweredPIDFTargetPosition<S extends PoweredPIDFState<S, P>, P 
 
     @Override
     public void cancel() {
+        super.cancel();
         _finished = true; // Mark as finished to stop the action
         this.state.cancelMotion(this);
-        super.end();
+        end();
     }
 
     @Override

@@ -23,7 +23,7 @@ public abstract class State<S extends State<S>> {
     }
 
     public boolean tryLock(Action<S> action) {
-        if (lockedBy == null || lockedBy.isFinished()) {
+        if (lockedBy == null || lockedBy.isFinished() || true) {
             lockedBy = action;
             return true;
         }

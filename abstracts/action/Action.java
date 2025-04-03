@@ -16,10 +16,12 @@ public abstract class Action<S extends State<S>> implements Task {
 
     // Start running
     public boolean start() {
+        System.out.println("[" + this.getClass().getSimpleName() + "::start] Action started.");
         return state.tryLock(this);
     }
 
     protected void end() {
+        System.out.println("[" + this.getClass().getSimpleName() + "::end] Action finished.");
         releaseLock();
     }
 
@@ -33,7 +35,9 @@ public abstract class Action<S extends State<S>> implements Task {
     // Check if finished
     public abstract boolean isFinished();
 
-    public abstract void cancel();
+    public void cancel() {
+        System.out.println("[" + this.getClass().getSimpleName() + "::cancel] Action canceled.");
+    }
 
     public boolean isAsync() {
         return false; // Default implementation, can be overridden

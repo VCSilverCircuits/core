@@ -64,7 +64,7 @@ public abstract class PoweredPIDFActuator<S extends PoweredPIDFState<S, P>, P ex
 
         controller.setSetPoint(newTarget);*/
 
-        System.out.println("PoweredPID " + this.getClass().getSimpleName() + "pid at setpoint?: " + controller.atSetPoint());
+        System.out.println("[PoweredPIDFActuator::loop] " + this.getClass().getSimpleName() + "pid at setpoint?: " + controller.atSetPoint());
 
         setInAction(!controller.atSetPoint() || power != 0);
         if (power != 0) {

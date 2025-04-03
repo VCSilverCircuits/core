@@ -56,19 +56,19 @@ public class BindingManager {
             if (gamepad1.debounceIsPressed(btn)) {
                 Task task = gamepad1Bindings.getTask(btn);
                 if (task != null) {
-                    System.out.println(btn + " pressed on Gamepad1. Triggering task " + task.getClass().getSimpleName());
+                    System.out.println("[BindingManager::loop] " + btn + " pressed on Gamepad1. Triggering task " + task.getClass().getSimpleName());
                     TaskManager.getInstance().runTask(task);
                 } else {
-                    System.out.println(btn + " pressed on Gamepad1. No task bound.");
+                    System.out.println("[BindingManager::loop] " + btn + " pressed on Gamepad1. No task bound.");
                 }
             }
             if (gamepad2.debounceIsPressed(btn)) {
                 Task task = gamepad2Bindings.getTask(btn);
                 if (task != null) {
-                    System.out.println(btn + " pressed on Gamepad2. Triggering task " + task.getClass().getSimpleName());
+                    System.out.println("[BindingManager::loop] " + btn + " pressed on Gamepad2. Triggering task " + task.getClass().getSimpleName());
                     TaskManager.getInstance().runTask(task);
                 } else {
-                    System.out.println(btn + " pressed on Gamepad2. No task bound.");
+                    System.out.println("[BindingManager::loop] " + btn + " pressed on Gamepad2. No task bound.");
                 }
             }
         }

@@ -20,8 +20,10 @@ public class ParallelTask implements Task {
 
     @Override
     public boolean start() {
+        System.out.println("[ParallelTask::start] Starting ParallelTask with children:");
         boolean success = true;
         for (Task task : _tasks) {
+            System.out.println("     " + task.getClass().getSimpleName() + " started: " + success);
             success = task.start();
         }
         return success;
@@ -29,8 +31,13 @@ public class ParallelTask implements Task {
 
     @Override
     public void loop() {
-        System.out.println("Looping ParallelTask");
+        System.out.println("[ParallelTask::loop] Looping ParallelTask with children:");
         for (Task task : _tasks) {
+            if (task.isFinished()) {
+                System.out.println("     " + task.getClass().getSimpleName() + " finished.");
+            } else {
+                System.out.println("     " + task.getClass().getSimpleName() + " not finished.");
+            }
             task.loop();
         }
     }
@@ -48,7 +55,9 @@ public class ParallelTask implements Task {
 
     @Override
     public void cancel() {
+        System.out.println("[ParallelTask::cancel] Canceling ParallelTask with children:");
         for (Task task : _tasks) {
+            System.out.println("     " + task.getClass().getSimpleName() + " canceled.");
             task.cancel();
         }
     }
