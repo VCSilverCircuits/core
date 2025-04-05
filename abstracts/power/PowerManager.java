@@ -6,8 +6,9 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import java.util.HashSet;
 
 import vcsc.core.abstracts.actuator.Actuator;
+import vcsc.core.abstracts.state.State;
 
-public class PowerManager {
+public class PowerManager extends State<PowerManager> {
     VoltageSensor voltageSensor;
     public PowerManager(HardwareMap hardwareMap) {
         this.voltageSensor = hardwareMap.voltageSensor.iterator().next();
@@ -18,5 +19,9 @@ public class PowerManager {
 
     public double getCurrentVoltage() {
         return voltageSensor.getVoltage();
+    }
+
+    public boolean isThrottled() {
+        return getCurrentVoltage() < 9.014;
     }
 }

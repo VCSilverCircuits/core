@@ -15,6 +15,7 @@ public class UntilTask implements Task {
     @Override
     public boolean start() {
         System.out.println("[UntilTask::start] Waiting until condition is met.");
+        _finished = false;
         return true;
     }
 

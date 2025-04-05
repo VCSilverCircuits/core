@@ -31,4 +31,8 @@ public class StateRegistry {
         }
         return stateClass.cast(states.get(stateClass));
     }
+
+    public void clearStates() {
+        states.clear();
+    }
 }
