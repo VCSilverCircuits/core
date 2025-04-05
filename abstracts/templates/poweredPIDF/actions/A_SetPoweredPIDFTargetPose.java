@@ -11,15 +11,19 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
     private final P targetPose;
     private DIRECTION direction;
     private boolean _finished = false;
+    Double tolerance;
 
-    public A_SetPoweredPIDFTargetPose(Class<S> klass, P targetPose, PIDMode PIDMode) {
+    public A_SetPoweredPIDFTargetPose(Class<S> klass, P targetPose, PIDMode PIDMode, Double tolerance) {
         super(klass);
         this.PIDMode = PIDMode;
+        if (PIDMode == EXCEED) {
+            this.tolerance = tolerance;
+        }
         this.targetPose = targetPose;
     }
 
     public A_SetPoweredPIDFTargetPose(Class<S> klass, P targetPose) {
-        this(klass, targetPose, vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.SETTLE);
+        this(klass, targetPose, vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.SETTLE, null);
     }
 
     @Override
@@ -43,18 +47,18 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
         System.out.println("[A_SetPoweredPIDFTargetPose::loop] Action target pose: " + targetPose);
 
         if (PIDMode == EXCEED) {
-            if (direction == DIRECTION.UP && state.getRealPosition() > state.getTargetPosition()) {
+            if (direction == DIRECTION.UP && state.getRealPosition() > state.getTargetPosition() - tolerance) {
                 System.out.println("[A_SetPoweredPIDFTargetPose::loop] Exceeding UP");
                 end();
-            } else if (direction == DIRECTION.DOWN && state.getRealPosition() < state.getTargetPosition()) {
+            } else if (direction == DIRECTION.DOWN && state.getRealPosition() < state.getTargetPosition() + tolerance) {
                 System.out.println("[A_SetPoweredPIDFTargetPose::loop] Exceeding DOWN");
                 end();
             }
-        } else { // SETTLE
-            if (state.idle() && state.getTargetPose() == targetPose) {
-                System.out.println("[A_SetPoweredPIDFTargetPose::loop] Settled");
-                end();
-            }
+        }
+        // SETTLE
+        if (state.idle() && state.getTargetPose() == targetPose) {
+            System.out.println("[A_SetPoweredPIDFTargetPose::loop] Settled");
+            end();
         }
     }
 

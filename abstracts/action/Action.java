@@ -16,8 +16,14 @@ public abstract class Action<S extends State<S>> implements Task {
 
     // Start running
     public boolean start() {
-        System.out.println("[" + this.getClass().getSimpleName() + "::start] Action started.");
-        return state.tryLock(this);
+        boolean started = state.tryLock(this);
+        if (started) {
+            System.out.println("[" + this.getClass().getSimpleName() + "::start] Action started.");
+        }
+        else {
+            System.out.println("[" + this.getClass().getSimpleName() + "::start] Action failed to start.");
+        }
+        return started;
     }
 
     protected void end() {

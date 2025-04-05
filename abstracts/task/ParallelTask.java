@@ -23,8 +23,8 @@ public class ParallelTask implements Task {
         System.out.println("[ParallelTask::start] Starting ParallelTask with children:");
         boolean success = true;
         for (Task task : _tasks) {
-            System.out.println("     " + task.getClass().getSimpleName() + " started: " + success);
             success = task.start();
+            System.out.println("     " + task.getClass().getSimpleName() + " started: " + success);
         }
         return success;
     }

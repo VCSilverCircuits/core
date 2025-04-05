@@ -1,5 +1,7 @@
 package vcsc.core.abstracts.templates.poweredPIDF;
 
+import static vcsc.teamcode.cmp.arm.rotation.ArmRotationActuator.DEGREES_PER_TICK;
+
 import vcsc.core.abstracts.action.Action;
 import vcsc.core.abstracts.actuator.Actuator;
 import vcsc.core.abstracts.state.State;

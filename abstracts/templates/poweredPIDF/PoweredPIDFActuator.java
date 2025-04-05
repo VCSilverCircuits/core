@@ -26,7 +26,7 @@ public abstract class PoweredPIDFActuator<S extends PoweredPIDFState<S, P>, P ex
                 coefficients.d,
                 coefficients.f
         );
-        controller.setTolerance(15);
+        controller.setTolerance(20);
         loopTime = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
         loopTime.reset();
     }

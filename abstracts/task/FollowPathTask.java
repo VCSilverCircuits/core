@@ -17,7 +17,7 @@ public class FollowPathTask implements Task {
         this.holdEnd = holdEnd;
     }
     public FollowPathTask(Follower follower, PathChain pathChain) {
-        new FollowPathTask(follower, pathChain, true);
+        this(follower, pathChain, true);
     }
 
     @Override

@@ -12,15 +12,19 @@ public class A_SetPoweredPIDFTargetPosition<S extends PoweredPIDFState<S, P>, P 
     private final double targetPosition;
     private DIRECTION direction;
     private boolean _finished = false;
+    Double tolerance;
 
-    public A_SetPoweredPIDFTargetPosition(Class<S> klass, double targetPosition, PIDMode PIDMode) {
+    public A_SetPoweredPIDFTargetPosition(Class<S> klass, double targetPosition, PIDMode PIDMode, Double tolerance) {
         super(klass);
         this.PIDMode = PIDMode;
+        if (PIDMode == EXCEED) {
+            this.tolerance = tolerance;
+        }
         this.targetPosition = targetPosition;
     }
 
     public A_SetPoweredPIDFTargetPosition(Class<S> klass, double targetPosition) {
-        this(klass, targetPosition, SETTLE);
+        this(klass, targetPosition, SETTLE, null);
     }
 
     @Override
@@ -42,15 +46,18 @@ public class A_SetPoweredPIDFTargetPosition<S extends PoweredPIDFState<S, P>, P 
         }
 
         if (PIDMode == EXCEED) {
-            if (direction == DIRECTION.UP && state.getRealPosition() > targetPosition) {
+            if (direction == DIRECTION.UP && state.getRealPosition() > targetPosition - tolerance) {
                 end();
-            } else if (direction == DIRECTION.DOWN && state.getRealPosition() < targetPosition) {
+                return;
+            } else if (direction == DIRECTION.DOWN && state.getRealPosition() < targetPosition + tolerance) {
                 end();
+                return;
             }
-        } else { // SETTLE
-            if (state.idle() && state.getTargetPosition() == targetPosition) {
-                end();
-            }
+        }
+
+        // SETTLE
+        if (state.idle() && state.getTargetPosition() == targetPosition) {
+            end();
         }
     }
 
