@@ -35,7 +35,7 @@ public class A_SetPoweredPIDFTargetPosition<S extends PoweredPIDFState<S, P>, P 
         }
         _finished = false;
         this.state.setTargetPosition(this, targetPosition);
-        this.direction = (targetPosition > this.state.getTargetPosition()) ? DIRECTION.UP : DIRECTION.DOWN;
+        this.direction = (targetPosition > this.state.getRealPosition()) ? DIRECTION.UP : DIRECTION.DOWN;
         return true;
     }
 
