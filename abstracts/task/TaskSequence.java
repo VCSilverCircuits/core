@@ -20,6 +20,11 @@ public class TaskSequence implements Task {
         }
     }
 
+    public TaskSequence thenRunnable(Runnable runnable) {
+        tasks.add(new RunnableTask(runnable));
+        return this;
+    }
+
     public TaskSequence then(Task task) {
         tasks.add(task);
         return this;
