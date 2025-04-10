@@ -17,6 +17,7 @@ public class DelayTask implements Task {
     public boolean start() {
         System.out.println("[DelayTask::start] Delaying for " + delay + " milliseconds");
         startTime = System.currentTimeMillis();
+        finished = false;
         return true;
     }
 

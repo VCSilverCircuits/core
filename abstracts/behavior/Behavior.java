@@ -14,7 +14,7 @@ public abstract class Behavior implements Task {
         return true;
     }
 
-    private void end() {
+    protected void end() {
         System.out.println("[" + this.getClass().getSimpleName() + "::end] Behavior finished.");
     }
 
