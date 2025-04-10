@@ -15,6 +15,7 @@ public class TaskSequence implements Task {
     boolean stopOnFail = true; // Default behavior to stop on failure
 
     public TaskSequence(Task... tasks) {
+        // TODO: Maybe make this different
         for (Task task : tasks) {
             this.then(task);
         }
