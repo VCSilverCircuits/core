@@ -1,7 +1,5 @@
 package vcsc.core.abstracts.templates.poweredPIDF;
 
-import static vcsc.teamcode.cmp.arm.rotation.ArmRotationActuator.DEGREES_PER_TICK;
-
 import vcsc.core.abstracts.action.Action;
 import vcsc.core.abstracts.actuator.Actuator;
 import vcsc.core.abstracts.state.State;
@@ -44,6 +42,7 @@ public class PoweredPIDFState<S extends PoweredPIDFState<S, P>, P extends Powere
 
     public void reset(Action<S> action) {
         primaryActuator.reset();
+        setTargetPosition(action, 0);
     }
 
     public double getRealPosition() {

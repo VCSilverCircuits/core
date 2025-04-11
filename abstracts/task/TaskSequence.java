@@ -1,5 +1,7 @@
 package vcsc.core.abstracts.task;
 
+import androidx.annotation.NonNull;
+
 import com.pedropathing.follower.Follower;
 import com.pedropathing.pathgen.PathChain;
 
@@ -24,7 +26,7 @@ public class TaskSequence implements Task {
     public TaskSequence thenRunnable(Runnable runnable) {
         tasks.add(new RunnableTask(runnable));
         return this;
-    }
+    }    String debugName = this.toString();
 
     public TaskSequence then(Task task) {
         tasks.add(task);
@@ -112,7 +114,6 @@ public class TaskSequence implements Task {
         return tasks;
     }
 
-
     public void loop() {
         System.out.println("[TaskSequence::loop] Looping through tasks:");
         if (!isRunning || currentTaskIndex >= tasks.size()) {
@@ -176,4 +177,22 @@ public class TaskSequence implements Task {
 //        }
 //        return requirements;
     }
+
+    public void setDebugName(String debugName) {
+        this.debugName = debugName;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        if (debugName != null) {
+            return debugName;
+        } else {
+            return super.toString();
+        }
+    }
+
+
+
+
 }

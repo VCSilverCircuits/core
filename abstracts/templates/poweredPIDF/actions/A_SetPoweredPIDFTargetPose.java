@@ -9,9 +9,9 @@ import vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFState;
 public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P extends PoweredPIDFPose> extends Action<S> {
     private final PIDMode PIDMode;
     private final P targetPose;
+    Double tolerance;
     private DIRECTION direction;
     private boolean _finished = false;
-    Double tolerance;
 
     public A_SetPoweredPIDFTargetPose(Class<S> klass, P targetPose, PIDMode PIDMode, Double tolerance) {
         super(klass);
@@ -35,7 +35,7 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
         }
         _finished = false;
         this.state.setTargetPose(this, targetPose);
-        this.direction = (targetPose.getPosition() > this.state.getTargetPosition()) ? DIRECTION.UP : DIRECTION.DOWN;
+        this.direction = (targetPose.getPosition() > this.state.getRealPosition()) ? DIRECTION.UP : DIRECTION.DOWN;
         return true;
     }
 
@@ -47,10 +47,10 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
         System.out.println("[A_SetPoweredPIDFTargetPose::loop] Action target pose: " + targetPose);
 
         if (PIDMode == EXCEED) {
-            if (direction == DIRECTION.UP && state.getRealPosition() > state.getTargetPosition() - tolerance) {
+            if (direction == DIRECTION.UP && state.getRealPosition() > targetPose.getPosition() - tolerance) {
                 System.out.println("[A_SetPoweredPIDFTargetPose::loop] Exceeding UP");
                 end();
-            } else if (direction == DIRECTION.DOWN && state.getRealPosition() < state.getTargetPosition() + tolerance) {
+            } else if (direction == DIRECTION.DOWN && state.getRealPosition() < targetPose.getPosition() + tolerance) {
                 System.out.println("[A_SetPoweredPIDFTargetPose::loop] Exceeding DOWN");
                 end();
             }
@@ -70,7 +70,12 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
 
     @Override
     public void cancel() {
-        this.state.cancelMotion(this);
+        try {
+            this.state.cancelMotion(this);
+        } catch (IllegalStateException e) {
+            System.out.println("[A_SetPoweredPIDFTargetPose::cancel] Exception: " + e.getMessage());
+        }
+
         super.end();
     }
 
