@@ -16,15 +16,20 @@ public class TaskManager {
     }
 
     public boolean runTask(Task task) {
-        for (Task other : runningTasks) {
-            if (task.conflictsWith(other)) {
-                System.out.println("[TaskManager::runTask] WARNING: Task " + task.getClass().getSimpleName() + " conflicts with task " + other.getClass().getSimpleName() + ". Cancelling " + other.getClass().getSimpleName());
-                cancelTask(other);
-                //return false;
-            }
-        }
+        return runTask(task, false);
+    }
 
-        clearTasks();
+    public boolean runTask(Task task, boolean noCancel) {
+        if (!noCancel) {
+            for (Task other : runningTasks) {
+                if (task.conflictsWith(other)) {
+                    System.out.println("[TaskManager::runTask] WARNING: Task " + task.getClass().getSimpleName() + " conflicts with task " + other.getClass().getSimpleName() + ". Cancelling " + other.getClass().getSimpleName());
+                    cancelTask(other);
+                    //return false;
+                }
+            }
+            clearTasks();
+        }
 
         boolean started = task.start();
         if (started) {
@@ -46,9 +51,13 @@ public class TaskManager {
     }
 
     public void cancelTask(Task task) {
-        System.out.println("[TaskManager::cancelTask] Canceling task: " + task.getClass().getSimpleName());
-        task.cancel();
-        runningTasks.remove(task);
+        if (runningTasks.contains(task)) {
+            System.out.println("[TaskManager::cancelTask] Canceling task: " + task.getClass().getSimpleName());
+            task.cancel();
+            runningTasks.remove(task);
+        } else {
+            System.out.println("[TaskManager::cancelTask] Trying to cancel task: " + task.getClass().getSimpleName() + ", but not task is not running");
+        }
     }
 
     public void loop() {
