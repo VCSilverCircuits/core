@@ -24,7 +24,7 @@ public class TaskManager {
             for (Task other : runningTasks) {
                 if (task.conflictsWith(other)) {
                     System.out.println("[TaskManager::runTask] WARNING: Task " + task.getClass().getSimpleName() + " conflicts with task " + other.getClass().getSimpleName() + ". Cancelling " + other.getClass().getSimpleName());
-                    cancelTask(other);
+                    // cancelTask(other);
                     //return false;
                 }
             }
