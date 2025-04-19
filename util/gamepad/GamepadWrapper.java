@@ -29,7 +29,7 @@ public class GamepadWrapper {
     }
 
     public boolean debounceIsPressed(GamepadButton btn) {
-        if (isPressed(btn)) {
+        if (isPressed(btn) && !gamepad.options) {
             debounce(btn);
             return true;
         }
