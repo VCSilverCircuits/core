@@ -3,19 +3,19 @@ package vcsc.core.abstracts.task;
 import java.util.Set;
 
 public interface Task {
-    boolean start();
+  boolean start();
 
-    // Perform updates if needed
-    void loop();
+  // Perform updates if needed
+  void loop();
 
-    // Check if finished
-    boolean isFinished();
+  // Check if finished
+  boolean isFinished();
 
-    void cancel();
+  void cancel();
 
-    boolean isAsync();
+  boolean isAsync();
 
-    boolean conflictsWith(Task other);
+  boolean conflictsWith(Task other);
 
-    Set<Class<?>> requirements();
+  Set<Class<?>> requirements();
 }

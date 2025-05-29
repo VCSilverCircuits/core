@@ -6,10 +6,13 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigu
 
 // TODO: Make this actually work maybe
 public class ServoGroup extends ServoImplEx {
-    ServoImplEx[] servos;
+  ServoImplEx[] servos;
 
-    public ServoGroup(ServoImplEx... servos) {
-        super((ServoControllerEx) servos[0].getController(), servos[0].getPortNumber(), ServoConfigurationType.getStandardServoType());
-        this.servos = servos;
-    }
+  public ServoGroup(ServoImplEx... servos) {
+    super(
+        (ServoControllerEx) servos[0].getController(),
+        servos[0].getPortNumber(),
+        ServoConfigurationType.getStandardServoType());
+    this.servos = servos;
+  }
 }
