@@ -1,7 +1,7 @@
-package vcsc.core.abstracts.templates.rotator;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.rotator;
 
-import vcsc.core.abstracts.action.Action;
-import vcsc.core.abstracts.state.State;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.action.Action;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.state.State;
 
 public class RotatorState<S extends RotatorState<S, P>, P extends RotatorPose> extends State<S> {
   double angle;

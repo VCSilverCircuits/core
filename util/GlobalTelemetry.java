@@ -1,4 +1,4 @@
-package vcsc.core.util;
+package org.firstinspires.ftc.teamcode.vcsc.core.util;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;

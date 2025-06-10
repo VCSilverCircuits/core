@@ -1,8 +1,8 @@
-package vcsc.core.abstracts.templates.poweredPIDF;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.poweredPIDF;
 
-import vcsc.core.abstracts.action.Action;
-import vcsc.core.abstracts.actuator.Actuator;
-import vcsc.core.abstracts.state.State;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.action.Action;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.actuator.Actuator;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.state.State;
 
 public class PoweredPIDFState<S extends PoweredPIDFState<S, P>, P extends PoweredPIDFPose>
     extends State<S> {

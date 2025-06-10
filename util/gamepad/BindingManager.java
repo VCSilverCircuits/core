@@ -1,8 +1,8 @@
-package vcsc.core.util.gamepad;
+package org.firstinspires.ftc.teamcode.vcsc.core.util.gamepad;
 
 import java.util.HashMap;
-import vcsc.core.abstracts.task.Task;
-import vcsc.core.abstracts.task.TaskManager;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.task.Task;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.task.TaskManager;
 
 public class BindingManager {
   static BindingManager instance = new BindingManager();

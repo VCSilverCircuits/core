@@ -1,9 +1,9 @@
-package vcsc.core.abstracts.behavior;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.behavior;
 
 import java.util.HashSet;
 import java.util.Set;
-import vcsc.core.abstracts.state.State;
-import vcsc.core.abstracts.task.Task;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.state.State;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.task.Task;
 
 public abstract class Behavior implements Task {
   protected Set<Class<? extends State<?>>> requirements = new HashSet<>();

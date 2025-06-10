@@ -1,9 +1,9 @@
-package vcsc.core.abstracts.task;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.task;
 
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import java.util.ArrayList;
 import java.util.List;
-import vcsc.core.util.GlobalTelemetry;
+import org.firstinspires.ftc.teamcode.vcsc.core.util.GlobalTelemetry;
 
 public class TaskManager {
   static final TaskManager instance = new TaskManager();

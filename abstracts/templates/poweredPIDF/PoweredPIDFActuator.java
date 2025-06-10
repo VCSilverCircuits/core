@@ -1,10 +1,10 @@
-package vcsc.core.abstracts.templates.poweredPIDF;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.poweredPIDF;
 
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import vcsc.core.abstracts.actuator.Actuator;
-import vcsc.core.abstracts.state.State;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.actuator.Actuator;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.state.State;
 
 public abstract class PoweredPIDFActuator<
         S extends PoweredPIDFState<S, P>, P extends PoweredPIDFPose>

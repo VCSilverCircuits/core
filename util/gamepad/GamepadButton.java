@@ -1,4 +1,4 @@
-package vcsc.core.util.gamepad;
+package org.firstinspires.ftc.teamcode.vcsc.core.util.gamepad;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 

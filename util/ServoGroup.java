@@ -1,4 +1,4 @@
-package vcsc.core.util;
+package org.firstinspires.ftc.teamcode.vcsc.core.util;
 
 import com.qualcomm.robotcore.hardware.ServoControllerEx;
 import com.qualcomm.robotcore.hardware.ServoImplEx;

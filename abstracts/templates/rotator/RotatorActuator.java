@@ -1,9 +1,9 @@
-package vcsc.core.abstracts.templates.rotator;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.rotator;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
-import vcsc.core.abstracts.actuator.Actuator;
-import vcsc.core.abstracts.state.State;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.actuator.Actuator;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.state.State;
 
 public class RotatorActuator<S extends RotatorState<S, P>, P extends RotatorPose>
     extends Actuator<S> {

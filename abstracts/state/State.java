@@ -1,8 +1,8 @@
-package vcsc.core.abstracts.state;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.state;
 
 import java.util.ArrayList;
-import vcsc.core.abstracts.action.Action;
-import vcsc.core.abstracts.actuator.Actuator;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.action.Action;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.actuator.Actuator;
 
 public abstract class State<S extends State<S>> {
   protected ArrayList<Actuator<S>> actuators = new ArrayList<>();

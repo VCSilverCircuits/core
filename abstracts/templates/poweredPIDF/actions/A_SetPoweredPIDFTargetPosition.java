@@ -1,11 +1,11 @@
-package vcsc.core.abstracts.templates.poweredPIDF.actions;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.poweredPIDF.actions;
 
-import static vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.EXCEED;
-import static vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.SETTLE;
+import static org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.EXCEED;
+import static org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.SETTLE;
 
-import vcsc.core.abstracts.action.Action;
-import vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFPose;
-import vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFState;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.action.Action;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFPose;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.poweredPIDF.PoweredPIDFState;
 
 public class A_SetPoweredPIDFTargetPosition<
         S extends PoweredPIDFState<S, P>, P extends PoweredPIDFPose>

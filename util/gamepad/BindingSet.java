@@ -1,8 +1,8 @@
-package vcsc.core.util.gamepad;
+package org.firstinspires.ftc.teamcode.vcsc.core.util.gamepad;
 
 import java.util.HashMap;
-import vcsc.core.abstracts.task.ParallelTask;
-import vcsc.core.abstracts.task.Task;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.task.ParallelTask;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.task.Task;
 
 public class BindingSet {
   HashMap<GamepadButton, Task> bindings = new HashMap<>();

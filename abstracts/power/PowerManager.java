@@ -1,10 +1,10 @@
-package vcsc.core.abstracts.power;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.power;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import java.util.HashSet;
-import vcsc.core.abstracts.actuator.Actuator;
-import vcsc.core.abstracts.state.State;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.actuator.Actuator;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.state.State;
 
 public class PowerManager extends State<PowerManager> {
   VoltageSensor voltageSensor;

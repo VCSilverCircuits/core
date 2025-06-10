@@ -1,6 +1,6 @@
-package vcsc.core.abstracts.actuator;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.actuator;
 
-import vcsc.core.abstracts.state.State;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.state.State;
 
 public abstract class Actuator<S extends State<S>> {
   protected boolean _inAction = false;

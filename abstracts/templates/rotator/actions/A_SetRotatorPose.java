@@ -1,8 +1,8 @@
-package vcsc.core.abstracts.templates.rotator.actions;
+package org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.rotator.actions;
 
-import vcsc.core.abstracts.action.Action;
-import vcsc.core.abstracts.templates.rotator.RotatorPose;
-import vcsc.core.abstracts.templates.rotator.RotatorState;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.action.Action;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.rotator.RotatorPose;
+import org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.rotator.RotatorState;
 
 public class A_SetRotatorPose<S extends RotatorState<S, P>, P extends RotatorPose>
     extends Action<S> {
