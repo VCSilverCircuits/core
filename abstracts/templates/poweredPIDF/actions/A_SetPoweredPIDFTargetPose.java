@@ -25,7 +25,21 @@ public class A_SetPoweredPIDFTargetPose<S extends PoweredPIDFState<S, P>, P exte
   }
 
   public A_SetPoweredPIDFTargetPose(Class<S> klass, P targetPose) {
-    this(klass, targetPose, org.firstinspires.ftc.teamcode.vcsc.core.abstracts.templates.poweredPIDF.actions.PIDMode.SETTLE, null);
+    this(
+        klass,
+        targetPose,
+        org.firstinspires
+            .ftc
+            .teamcode
+            .vcsc
+            .core
+            .abstracts
+            .templates
+            .poweredPIDF
+            .actions
+            .PIDMode
+            .SETTLE,
+        null);
   }
 
   @Override
